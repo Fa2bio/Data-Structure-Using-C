@@ -29,4 +29,4 @@ This project aims to simulate an attendance sheet of a group of students.
 
 ## <a name="run-application"></a>Run Application
 
-- After meeting the requirements and installation, execute the main.cpp file
+- After meeting the requirements and installation, compile the main.cpp file
