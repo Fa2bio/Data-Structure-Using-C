@@ -25,7 +25,7 @@ This project aims to simulate an attendance sheet of a group of students.
 ## <a name="installation"></a>Installation
 
 - Clone the repository for your device;
-- In your ide, import it as an existing project.
+- Import it as an existing project in your ide.
 
 ## <a name="run-application"></a>Run Application
 
