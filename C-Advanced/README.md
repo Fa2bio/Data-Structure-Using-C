@@ -4,7 +4,7 @@
 
 ### Contents
   
-* [What is it?](#what-is-it
+* [What is it?](#what-is-it)
 * [Technologies Used](#technologies)
 
 ## <a name="what-is-it"></a>What is it?
