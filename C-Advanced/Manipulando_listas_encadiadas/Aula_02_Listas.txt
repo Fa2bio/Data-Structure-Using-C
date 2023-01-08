@@ -1,0 +1,198 @@
+ Estrutura de dados - 15/08
+ 
+ *Impressão;
+ *Retiradas:
+    - Da 1ª ocorrencia;
+    - De todas as ocorrencias;
+    - Da posição K.
+    
+------------------------------- // ----------------------------------
+
+typedef struct tlse{
+
+    int info;
+    struct tlse *prox;
+
+}TLSE;
+
+void imprimir(TLSE *l){
+
+    while(l){
+        printf("%d",l->info);
+        l = l->prox;
+    }
+    
+}
+
+void imprimir_reverso(TLSE *l){
+
+    TP *p = cria(); //cria pilha
+    while(l){
+        push(p,l->info);
+        l = l->prox;
+    }
+    
+    while(!vazia(p))
+        printf("%d", pop(p));
+    libera(p);
+    
+}
+
+void imprimir_reverso_recursivo(TLSE *l){
+
+    if(!l) return;
+    imprimir_reverso_recursivo(l->prox);
+    printf("%d",l->info);
+    
+}
+
+TLSE *retira(TLSE *l, int x){
+
+    TLSE *p = l, *ant = NULL;
+    whilw((p) && (p->info!=x)){
+        ant = p;
+        p = p->prox;
+    }
+    
+    if(!p) return l;
+    if(!ant) l = l->prox;
+    else ant->prox = p->prox;
+    free(p);
+    return l;
+}
+
+TLSE *retira_recursivo(TLSE *l, int x){
+
+    if(!l) return l;
+    if(l->info == x){
+        TLSE *p = l;
+        l = l->prox;
+        free(p);
+        return l;
+    }
+    l->prox = retira_recursivo(l->prox,x);
+    return l;
+}
+
+TLSE *busca(TLSE *l, int x){
+    TLSE *p = l;
+    while((p) && (p->info != x)){
+        p = p->prox;
+    }
+    return p;
+}
+
+TLSE *retira_todas_ocorrencias(TLSE *l, int x){
+
+    while(busca(l,x)){
+        l = retira(l,x);
+    }
+    return l;
+}
+
+TLSE *retira_todas_ocorrencias_recursivo(TLSE *l, int x){
+    if(!l) return l;
+    if(l->info == x){
+        TLSE *p = l;
+        l = l->prox;
+        free(p);
+        l = retira_todas_ocorrencias_recursivo(l->prox,x);
+    }else{
+        l->prox = retira_todas_ocorrencias_recursivo(l->prox,x);
+    }
+    return l;
+}
+
+
+TLSE *retira_pos_k(TLSE*l, int k){
+
+    if(k<=0) return l;
+    TLSE *p = l, ant = NULL:
+    int cont = 1;
+    while((p) && (cont != k)){
+        ant = p;
+        p = p->prox;
+    }
+    if(!p) return l;
+    if(!ant) l = l->prox;
+    else ant->prox = p->prox;
+    free(p);
+    return l;
+
+}
+
+TLSE *retira_pos_k_recursivo(TLSE *l, int k){
+
+    if((!l) || (k <= 0)) return l;
+    if(k == 1){
+        TLSE *p = l;
+        l = l->prox;
+        free(p);
+    }else{
+        l = l->prox;
+    }
+    return l;
+    
+}
+
+
+void troca(TLSE *x, TLSE *y){
+    int temp = x->info;
+    x->info = y->info;
+    y->info = temp;
+}
+    
+void ordena(TLSE *l){
+
+    TLSE *p;
+    for(p = l;p;p->prox){
+        TLSE *q, *menor = p;
+        for(q = p->prox;q;q = q->prox){
+            if(menor->info > q->info) menor = q;
+            if(menor!=p)
+                troca(p,menor);
+        }
+    }
+}
+
+void ordena_recursivo(TLSE *l){
+
+    if(!l) return;
+    TLSE *menor = l, *q;
+    for(q = l->prox;q;q = q->prox){
+        if(menor->info > q->info) menor = q;
+    }
+    if(menor != l){
+        int temp = l->info;
+        l->info = menor->info;
+        menor->info = temp;
+    }
+    ordena_recursivo(l->prox);
+
+}
+
+TLSE *MER(TLSE *l, TLSE *menor){
+
+    if(!l) return menor;
+    if(menor->info > l->info) menor = l;
+    return(l->prox,menor);
+
+}
+
+TLSE *MER2(TLSE *l){
+
+    if(!l->prox) return l;
+    TLSE *menor = MER2(l->prox);
+    if(menor->info < l->info) return menor;
+    else return l;
+
+}
+
+void ordena_recursivo_recursivo(TLSE *l){
+    
+    if((!l) || (!l->prox)) return;
+    TLSE *menor = MER(l,l); //MER2(l);
+    if (menor != l) troca(l, menor);
+    ordena_recursivo_recursivo(l->prox);
+
+}

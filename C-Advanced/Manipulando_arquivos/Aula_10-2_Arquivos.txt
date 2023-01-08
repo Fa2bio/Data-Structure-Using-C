@@ -1,0 +1,131 @@
+ Estrutura de dados - 17/09
+ 
+ Arquivos Binarios - Leitura/Escrita:
+ 
+-  Leitura
+    
+    int fread(void *ptr, int tam_1_elem, int nelem, File *fp);
+    
+    nlem, ok !
+    <nelem, ERRO!
+
+- Escrita
+    
+    int fwrite(void *ptr, int tam_1_elem, int nelem, File *fp);
+    
+    = nelem, ok!
+    <nelem, ERRO !
+    
+- Operações sobre os ponteiros dos arquivos
+
+    int fseek(File *fp, long offset, int origem);
+        
+                seek_cur
+              /
+        origem - seek_set
+              \ 
+                seek_end
+    
+    Posição final: offset + origem
+    
+               0, Ok!
+             /
+        fseek 
+             \ 
+               ≠ 0, Erro!
+
+void rewind (File *fp)
+
+    fseek(fp, 0L, seek_set);
+    
+long int ftell(File *fp);
+
+                -1, ERRO!
+             /
+        ftell 
+             \ 
+               Qualquer outro valor positivo, OK!
+               
+------------------------------- // ----------------------------------
+
+int main(void){
+    
+    int n;
+    scanf("%d",&n);
+    if(n<=0) return 0;
+    
+    int vet[n], i;
+    
+    for(i=0;i<n;i++)
+        scanf("%d",&vet[i]);
+    
+    File *fp = fopen("teste.bin","wb");
+    if(!fp) exit 1;
+    
+    fwhite (vet, sizeof(int),n,fp);
+    fclose(fp);
+    
+    int resp[n];
+    
+    fp = fopen("teste.bin","rb");
+    if(!fp) exit 1;
+    
+    fread(resp,sizeof(int),n,fp);
+    fclose(fp);
+    
+    for(i=0;i<n;i++)
+        printf("%d\t%d\n", vet[i],resp[i]);
+        
+    return 0;
+}
+
+------------------------------- // ----------------------------------
+
+- Busca Binaria
+
+    $0  | 10 |
+    $4  | 15 |
+    $8  | 16 |
+    $12 | 21 |
+    %16 | 24 |
+    %20 | 30 |
+    
+    
+    int busca_binaria( int *vet, int n, int x){
+        
+        int ini = 0, fim = n-1, meio;
+    
+        while(ini <= fim){
+            meio = (ini+fim)/2;
+            if(vet[meio]==x) return meio;
+            if(vet[meio] > x) fim = meio-1;
+            else ini = meio+1;
+        }
+        
+        return -1;
+    }
+    
+    int busca_binaria_arquivos(char *arq, int x){
+    
+        File *fp = fopen(arq, "rb");
+        if(!fp) exit 1;
+        
+        long int ini = 0<, meio, fim;
+        fseek(fp, 0<, seek_end);
+        fim = ftell(fp);
+        
+        while(ini <= fim){
+        
+            meio = (((ini + fim)/sizeof(int))/2)*sizeof(int);
+            int elem_meio;
+            fseek(fp,meio,seek_set);
+            fread(&elem_meio,sizeof(int),1,fp);
+            
+            if(elem_meio==x) return meio;
+            if(elem_meio>x) fim = meio-sizeof(int);
+            else ini = meio + sizeof(int);
+            
+        }
+        return -1;
+     }
+        

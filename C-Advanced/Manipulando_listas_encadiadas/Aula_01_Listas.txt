@@ -1,0 +1,154 @@
+ Estrutura de dados - 13/08
+ 
+ *Árvores:
+    - Binarias;
+    - Binaria de busca;
+    - AVL;
+
+*Grafos;
+*Arquivos;
+*Árvores B e B+;
+*Tabelas Hash;
+*Heaps.
+
+------------------------------- // ----------------------------------
+
+Revisão:
+
+TLSE (Tipo, Lista, Simplesmente, Encadeada):
+
+/* Operações */
+
+*Inserção:
+    - Inicio;
+    - Fim;
+    - Ordenado;
+    - K.
+
+*Retirada: 
+    - Elemento X (1º ocorrencia)
+    - K;
+    - Todos elementos iguais a X;
+    - Todas repetições;
+
+*Busca 1º ocorrencia de um elemento;
+*Liberar a Estrutura;
+*Impressão da Estrutura;
+*Inicialização da Estrutura.
+
+------------------------------- // ----------------------------------
+
+typedef struct tlse{
+
+    int info;
+    struct tlse *prox;
+
+}TLSE;
+
+
+TSLE *iniciliza(void){
+    return NULL;
+}
+
+TSLE *inserir_inicio(TLSE *l, int x){
+
+    TSLE *novo = (TSLE*)malloc(sizeof(TLSE));
+    novo->info = x;
+    novo->prox = l;
+    return novo;
+    
+}
+
+/* Quem usa
+
+TLSE *l = iniciliza();
+l = inserir_inicio(l,3);
+l = inserir_inicio(l,10);
+
+*/
+
+TLSE *inserir_fim(TLSE *l, int x){
+
+    if(!l) return inserir_inicio(l,x);
+    TLSE *p = l;
+    while(p->prox) p = p->prox;
+    p->prox = inserir_inicio(NULL,x);
+    return l;
+    
+}
+
+TLSE *inserir_fim_recursivo(TLSE *l, int x){
+    
+    if(!l) return inserir_inicio(l,x);
+    l->prox = inserir_fim_recursivo(l->prox,x);
+    return l;
+
+}
+
+TLSE *inserir_ordenado(TLSE *l, int x){
+    
+    TLSE *p = l, *ant = NULL;
+    
+    while((p) && (p->info <= x)){
+        ant = p;
+        p = p->prox;
+    }
+    
+    if(!ant) return inserir_inicio(l,x);
+    ant->prox = inserir_inicio(p,x);
+    return l;
+}
+
+TLSE *inserir_ordenado_recursivo(TLSE *l, int x){
+
+    if((!l) || (x <= l->info)) return inserir_inicio(l,x);
+    l-prox = inserir_ordenado_recursivo(l->prox,x);
+    return l;
+}
+
+TLSE *inseri_posicaoK(TLSE *l, int x, int k){
+
+    int cont;
+    
+    if(k<=0) return l;
+    if(k==1) return inserir_inicio(l,x);
+    if(!l){
+        l = inserir_inicio(l,x);
+        cont = 2;
+    }else cont = 1;
+    
+    TLSE *p,*ant;
+    
+    if(cont == 1){
+        p = l;
+        ant = NULL;
+    }else{
+        ant = l;
+        p = l->prox;
+    }
+    
+    while(cont<K){
+    
+        if(!p){
+            ant->prox = inserir_inicio(p,x);
+            ant = ant->prox;
+        }else{
+            ant = p;
+            p = p->prox;
+        }
+        cont++;    
+    }
+    
+    ant->prox = inserir_inicio(p,x);
+    return l;
+}
+
+TLSE *inseri_posicaoK_recursivo(TLSE *l, int x, int k){
+
+    if(k<=0) return l;
+    if(k==1) return inserir_inicio(l,x);
+    if(!l) l = inserir_inicio(l,x);
+    
+    l->prox = inseri_posicaoK_recursivo(l->prox,x,k--);
+    return l;
+}
