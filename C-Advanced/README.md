@@ -1,14 +1,11 @@
-<h1>C Basic</h1>
+<h1>C Advanced</h1>
 
 > Status: Finished ✔️
 
 ### Contents
   
 * [What is it?](#what-is-it)
-* [Requirements](#requirements)
 * [Technologies Used](#technologies)
-* [Installation](#installation)
-* [Run Application](#run-application)
 
 ## <a name="what-is-it"></a>What is it?
 
@@ -18,10 +15,10 @@ This directory has three projects that are the resolutions of the following exer
 [Lista_1.pdf](https://github.com/Fa2bio/Data-Structure-Using-C/files/10367734/Lista_1.pdf)
 
 * Lista 2 - 
-[Lista 2.pdf](https://github.com/Fa2bio/Data-Structure-Using-C/files/10367693/Lista.2.pdf)
+[Lista_2.pdf](https://github.com/Fa2bio/Data-Structure-Using-C/files/10367736/Lista_2.pdf)
 
 * Lista 3 - 
-[Lista 3.pdf](https://github.com/Fa2bio/Data-Structure-Using-C/files/10367695/Lista.3.pdf)
+[Lista 3.pdf](https://github.com/Fa2bio/Data-Structure-Using-C/files/10367737/Lista_3.pdf)
 
 ## <a name="requirements"></a>Requirements
 
