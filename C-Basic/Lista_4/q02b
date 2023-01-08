@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct lista{
+    char codigo[40];
+    char nome[40];
+    float preco;
+    struct lista *prox;};
+typedef struct lista Lista;
+
+int contador(Lista *L){
+    if(L==NULL) return;
+    return 1+contador(L->prox);
+}
+
+float calculaMedia(Lista *L){
+    float soma = 0.0f;
+    Lista *aux = L;
+    while(aux!=NULL){
+        soma += aux->preco;
+        aux = aux->prox;
+    }
+    return soma;
+}
+
+
+void inserir(Lista **L){
+    
+    Lista *aux;
+    aux = (Lista*)malloc(sizeof(Lista));
+    
+    *L==NULL;
+    printf("Digite o codigo: ");
+    scanf("%s",&aux->codigo);
+    printf("Digite o nome: ");
+    scanf("%s",&aux->nome);
+    printf("Digite o preco: ");
+    scanf("%f",&aux->preco);
+    aux->prox = *L;
+    *L = aux;
+}
+
+
+void printar(Lista *L){
+    Lista *aux = L;
+    while(aux!=NULL){
+        printf("%d",aux->preco);
+        printf("->");
+        aux = aux->prox;
+    }
+    printf("NULL");
+}
+
+void destroi(Lista *L){
+    Lista *anterior = NULL;
+    Lista *atual = L;
+    while (atual != NULL){
+        anterior = atual->prox;
+        free(atual);
+        atual = anterior;
+    }
+}
+
+
+int main(){
+
+    Lista *L;
+    L = NULL;
+    int num;
+    float media;
+    
+    printf("Digite quantos produtos estarao na lista:");
+    scanf("%d",&num);
+    
+    while(num>0){
+        inserir(&L);
+        num--;
+    }
+    
+    num = contador(L);
+    media = calculaMedia(L);
+    media = (float)media/num;
+    printf("A media de preços eh: %f",media);
+    if(L==NULL){
+        free(L);
+    }else destroi(L);
+
+    return 0;
+}

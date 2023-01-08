@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+struct pilha{
+  int n;
+  int tamanho;
+  int *vet;};
+typedef struct pilha Pilha;
+
+
+
+void push(Pilha *p, int *topo, int x){
+
+  if(p->n==*topo){
+    *topo+=1;
+    p->vet = realloc(p->vet,1+sizeof(p->vet));
+  }
+    p->n++;
+    p->vet[p->n-1] = x;
+}
+
+
+
+void pop(Pilha *p, int topo){
+
+  if(!p->n){
+    exit(1);
+  }else{
+    printf("\n %d",p->vet[p->n-1]);
+    p->n--;
+  }
+}
+
+
+
+int main(void) {
+  int x;
+  Pilha p;
+  p.n = 0;
+  printf("Digite o tamanho inicial da pilha: ");
+  scanf("%d",&p.tamanho);
+  printf("\n");
+  p.vet=malloc(sizeof(Pilha)*p.tamanho);
+  int i=0;
+
+  while(i<p.tamanho+1){
+    printf("Digite o elemento: ");
+    scanf("%d",&x);
+    if(i==p.tamanho-1) printf("Pilha cheia, digite um numeros diferentes de -1 para continuar ou -1 para dar pop \n");
+    if(x==-1){
+      for(int i=0;i<p.tamanho;i++){
+        pop(&p,p.tamanho);
+      }
+      break;
+    }
+    push(&p, &p.tamanho, x);
+    i++;
+  }
+  free(p.vet);
+  return 0;
+}
