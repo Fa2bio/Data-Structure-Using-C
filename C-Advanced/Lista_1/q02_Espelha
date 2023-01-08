@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+TAB* espelha(TAB *ab){
+    
+    TAB *ba = (TAB*)malloc(sizeof(TAB));
+    
+    if(ab){
+    
+        ba->info = ab->info;
+        
+        if(ab->esq && ab->dir){
+            ba->esq = espelha(ab->dir);
+        }else if(ab->esq && !(ab->dir)){
+            ba->dir = espelha(ab->esq);
+        }else{
+          ba->esq = NULL;
+        }
+        
+        if(ab->dir && ab->esq){
+            ba->dir = espelha(ab->esq);
+        }else if(ab->dir && !(ab->esq)){
+            ba->esq = espelha(ab->dir);
+        }else{
+          ba->esq = NULL;
+        }
+        
+    }
+    
+    return ba;
+}

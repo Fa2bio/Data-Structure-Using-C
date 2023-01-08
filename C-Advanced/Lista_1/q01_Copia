@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+TAB* copia(TAB *ab){
+    
+    TAB *ba = (TAB*)malloc(sizeof(TAB));
+    
+    if(ab){
+    
+        ba->info = ab->info;
+        
+        if(ab->esq){
+            ba->esq = copia(ab->esq);
+        }else{
+            ba->esq = NULL;
+        }
+        
+        if(ab->dir){
+            ba->dir = copia(ab->dir);
+        }else{
+            ba->dir = NULL;
+        }
+        
+    }
+    
+    return ba;
+}

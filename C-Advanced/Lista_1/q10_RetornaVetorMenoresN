@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+TL *mna(TABB *a, int n){
+
+    if(!a) return NULL;
+    if(a->info >= n)
+        return mna(a->esq, n);
+    return junta_listas(mna(a->esq,n), ins_ini(mna(a->dir,n),a->info));
+    
+}
+
+int *mn(TABB *a, int n){
+
+    if(!a) return NULL;
+    TL *aux = mna(a,n);
+    if(!aux) return NULL;
+    int n = conta(aux), i;
+    int *resp = (int *)malloc(sizeof(int)*n);
+    TL *p = aux;
+    i = 0;
+    while(p){
+        resp[i++] = p->info
+        p = p->prox;
+    }
+    libera(aux);
+    
+}

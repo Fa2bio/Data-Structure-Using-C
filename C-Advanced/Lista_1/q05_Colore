@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+//pre-ordem
+void ca(TAB *a, int cor){
+
+    if(!a) return;
+    a->cor = cor;
+    if(!cor) cor = 1;
+    else cor = 0;
+    ca(a->esq, cor);
+    ca(a->dir, cor);
+    
+}
+
+//pós-ordem
+void ca(TAB *a, int cor){
+
+    if(!a) return;
+    else cor = 0;
+    ca(a->esq, !cor);
+    ca(a->dir, !cor);
+    a->cor = cor;
+    
+}
+
+//interativo
+void colore(TAB *a){
+
+    if(!a) return;
+    TF *f = cria_f(); //tipo fila
+    a->cor = 0;
+    insere_f(f,a);
+    while(!vazia_f(f)){
+        TAB *aux = retira_f(f);
+        if(aux->esq){
+            aux->esq->cor = !aux->cor;
+            insere_f(f,aux->esq);
+            if(aux->dir){
+                aux->dir->cor = !aux->cor;
+                insere_f(f,aux->dir);
+            }
+        }
+    }
+    libera_f(f);
+}
+
+
+void colore(TAB *a){
+
+    if(!a) return;
+    ca(a,0);
+    
+}
+

@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+TAB* maior (TABB *a){
+    if(!a) return NULL;
+    TAB *maior = a, *e = maior(a->esq), *d = maior(a->dir);
+    if((e) && (maior->info < e->info)) maior = e;
+    if((d) && (maior->info < d->info)) maior = d;
+    return maior;
+}

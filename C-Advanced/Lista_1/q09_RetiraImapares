@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+TABB *ret_imp(TABB *a){
+    if(!a) return a;
+    if(a->info%2){
+        a = retira(a,a->info);
+        return ret_imp(a);
+    }
+    a->esq = ret_imp(a->esq);
+    a->dir = ret_imp(a->dir);
+    return a;
+}
