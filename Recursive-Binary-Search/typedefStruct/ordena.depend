@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1504186348 source:c:\androidcourse\progestruturada\ordena\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1505218660 source:c:\androidcourse\aulas\progestru\typedefstruct\main.c
+	<stdio.h>
+	<stdlib.h>
+
