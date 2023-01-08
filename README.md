@@ -1,1 +1,32 @@
-# Data-Structure-Using-C
+<h1>Attendance Sheet</h1>
+
+> Status: Finished ✔️
+
+### Contents
+  
+* [What is it?](#what-is-it)
+* [Requirements](#requirements)
+* [Technologies Used](#technologies)
+* [Installation](#installation)
+* [Run Application](#run-application)
+
+## <a name="what-is-it"></a>What is it?
+
+This project aims to simulate an attendance sheet of a group of students.
+
+## <a name="requirements"></a>Requirements
+
+- C/GCC Compiler
+
+## <a name="technologies"></a>Technologies Used
+
+- C++
+
+## <a name="installation"></a>Installation
+
+- Clone the repository for your device;
+- In your ide, import it as an existing project.
+
+## <a name="run-application"></a>Run Application
+
+- After meeting the requirements and installation, execute the main.cpp file
