@@ -9,7 +9,7 @@
 
 ## <a name="what-is-it"></a>What is it?
 
-This directory has three projects that are the resolutions of the following exercise lists of the data structure course at Universidade Federal Fluminense.
+This directory has resolutions of the following exercise lists of the data structure course at Universidade Federal Fluminense.
 
 * Lista 1 - 
 [Lista_1.pdf](https://github.com/Fa2bio/Data-Structure-Using-C/files/10367734/Lista_1.pdf)
